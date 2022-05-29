@@ -45,31 +45,35 @@ df_filtered = df.query(
 st.title(':video_game: Faker Matches Data Analysis during International MSI 2022')
 st.markdown('##')
 
-total_matches = int(len(df_filtered))
-average_kda = round(df_filtered['KDA'].mean(), 1)
-average_minions = round(df_filtered['CS'].mean(), 1)
-win_rate = round(df_filtered['W/L'].value_counts()['Win']/total_matches * 100, 1)
-first_column, second_column, third_column, fourth_column = st.columns(4)
+if len(df_filtered) > 0:
 
-with first_column:
-    st.subheader('Total matches:')
-    st.subheader(f'{total_matches} :computer:')
+    total_matches = int(len(df_filtered))
+    average_kda = round(df_filtered['KDA'].mean(), 1)
+    average_minions = round(df_filtered['CS'].mean(), 1)
+    win_rate = round(df_filtered['W/L'].value_counts()['Win']/total_matches * 100, 1)
+    first_column, second_column, third_column, fourth_column = st.columns(4)
 
-with second_column:
-    st.subheader('Average KDA:')
-    st.subheader(f'{average_kda} :skull:')
+    with first_column:
+        st.subheader('Total matches:')
+        st.subheader(f'{total_matches} :computer:')
 
-with third_column:
-    st.subheader('Average minions:')
-    st.subheader(f'{average_minions} :ghost:')
+    with second_column:
+        st.subheader('Average KDA:')
+        st.subheader(f'{average_kda} :skull:')
 
-with fourth_column:
-    st.subheader('Average winrate:')
-    st.subheader(f'{win_rate} :trophy:')
+    with third_column:
+        st.subheader('Average minions:')
+        st.subheader(f'{average_minions} :ghost:')
 
-st.markdown('---')
+    with fourth_column:
+        st.subheader('Average winrate:')
+        st.subheader(f'{win_rate} :trophy:')
 
-st.dataframe(df_filtered)
+    st.markdown('---')
+
+    st.dataframe(df_filtered)
+else:
+    st.subheader('There is no matches that meet selected criteria.')
 
 # DELETES DEFAULT STREAMLIT FOOTER
 st.markdown("""
